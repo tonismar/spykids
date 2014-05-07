@@ -1,14 +1,21 @@
 package br.com.tonismar.app;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -47,14 +54,14 @@ public class OcorrenciaAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)
                     ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View v = inflater.inflate(R.layout.list_item, null);
-            TextView txtDia = (TextView) v.findViewById(R.id.txtdia);
-            TextView txtHora = (TextView) v.findViewById(R.id.txthora);
-            TextView txtMensagem = (TextView) v.findViewById(R.id.txtmensagem);
+            TextView txtUser = (TextView) v.findViewById(R.id.txtUser);
+            TextView txtMensagem = (TextView) v.findViewById(R.id.txtMensagem);
+            ImageView imgImagem = (ImageView) v.findViewById(R.id.imgImagem);
 
             holder = new ViewHolder();
-            holder.txtDia = txtDia;
-            holder.txtHora = txtHora;
+            holder.txtUser = txtUser;
             holder.txtMensagem = txtMensagem;
+            holder.imgImagem = imgImagem;
 
             v.setTag(holder);
             viewAtual = v;
@@ -62,19 +69,37 @@ public class OcorrenciaAdapter extends BaseAdapter {
             holder = (ViewHolder) viewAtual.getTag();
         }
 
+
+
         Ocorrencia ocorrencia = ocorrencias.get(pos);
-        holder.txtDia.setText(ocorrencia.getDia());
-        holder.txtHora.setText(ocorrencia.getHora());
+        holder.txtUser.setText(ocorrencia.getUser());
         holder.txtMensagem.setText(ocorrencia.getMensagem());
+        holder.imgImagem.setImageBitmap(getBitmapFromURL(ocorrencia.getImagem()));
         holder.ocorrencia = ocorrencia;
 
         return viewAtual;
     }
 
+    /* Tudo isso só para carregar a imagem da url */
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL("http://spykids.bl.ee/img/" + src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     class ViewHolder {
-        public TextView txtDia;
-        public TextView txtHora;
+        public TextView txtUser;
         public TextView txtMensagem;
+        public ImageView imgImagem;
         public Ocorrencia ocorrencia = null;
     }
 }

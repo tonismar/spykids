@@ -1,48 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/lblNome"
+        android:id="@+id/txtUser"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/lblDia"
-        android:id="@+id/lblDia"
-        android:textStyle="bold"/>
-
-    <TextView android:id="@+id/txtdia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/lblHora"
-        android:id="@+id/lblHora"
-        android:textStyle="bold"/>
-
-    <TextView android:id="@+id/txthora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="?android:attr/textAppearanceSmall"
         android:text="@string/lblMsg"
-        android:id="@+id/lblMsg"
-        android:textStyle="bold"/>
+        android:id="@+id/txtMensagem"
+        android:layout_below="@+id/txtUser"
+        android:layout_alignLeft="@+id/txtUser"
+        android:layout_alignStart="@+id/txtUser"
+        android:layout_marginTop="20dp"
+        android:maxWidth="200dp" />
 
-    <TextView android:id="@+id/txtmensagem"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="" />
-
-</LinearLayout>
+        android:id="@+id/imgImagem"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_launcher"
+        android:layout_marginRight="4dp"
+        android:layout_alignBottom="@+id/txtMensagem"
+        android:layout_alignParentTop="true" />
+</RelativeLayout>
